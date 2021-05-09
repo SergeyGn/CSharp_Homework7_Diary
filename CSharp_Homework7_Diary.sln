@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp_Homework7_Diary", "CSharp_Homework7_Diary\CSharp_Homework7_Diary.csproj", "{70116CBB-B9C6-414A-A699-7921643E33B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70116CBB-B9C6-414A-A699-7921643E33B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70116CBB-B9C6-414A-A699-7921643E33B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70116CBB-B9C6-414A-A699-7921643E33B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70116CBB-B9C6-414A-A699-7921643E33B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42E0BF83-3D14-4923-BA97-6B9A1FBB3005}
+	EndGlobalSection
+EndGlobal
