@@ -18,18 +18,25 @@ namespace CSharp_Homework7_Diary
         /// Время создания заметки
         /// </summary>
         private DateTime _timeCreateNote;
+        /// <summary>
+        /// Тип заметки 'i'-важная ;'c'-концептуальная;' '-обычная. 
+        /// </summary>
+        private char _typeNote; 
         public DateTime TimeBusines { get => _timeBisnes; set => _timeBisnes = value; }
         public string NameBusines { get => _nameBisnes; set => _nameBisnes = value; }
         public DateTime TimeCreateNote { get => _timeCreateNote; set => _timeCreateNote = value; }
+        public char TypeNote { get => _typeNote; set => _typeNote = value; }
+        
 
-        public Note(DateTime TimeBisnes, string NameBisnes, DateTime TimeCreateNote)
+        public Note(DateTime TimeBisnes, string NameBisnes, DateTime TimeCreateNote, char TypeNote)
         {
             _timeBisnes = TimeBisnes;
             _nameBisnes=NameBisnes;
             _timeCreateNote = TimeCreateNote;
+            _typeNote = TypeNote;
         }
         public Note(string NameBisnes)
-            :this(new DateTime(),NameBisnes,new DateTime())
+            :this(new DateTime(),NameBisnes,new DateTime(),' ')
         {
         }
 

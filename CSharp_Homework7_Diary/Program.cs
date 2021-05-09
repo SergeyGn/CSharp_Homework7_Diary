@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using static CSharp_Homework7_Diary.CreatePage;
+using static CSharp_Homework7_Diary.ReadPage;
 
 namespace CSharp_Homework7_Diary
 {
@@ -11,76 +13,28 @@ namespace CSharp_Homework7_Diary
         static string _pathInDiary = @"Diary\";
         static void Main(string[] args)
         {
-
-            MainMenu();
-            
+            MainMenu();   
         }
-
         private static void MainMenu()
         {
             Console.WriteLine("Для создания задач нажмите 1");
+            Console.WriteLine("Для просмотра задач нажмите 2");
             ConsoleKeyInfo enter = Console.ReadKey(true);
             switch (enter.Key)
             {
                 case ConsoleKey.D1:
-                    CreatePageDiary(DateTime.Now);
+                CreatePageDiary();
+                    break;
+                case ConsoleKey.D2:
+                ReadPageDiary();
                     break;
                 default:
                     MainMenu();
                     break;
             }
         }
-        private static void CreatePageDiary(DateTime dateTime)
-        {
-            DateTime dataPageDiary = CheckDate();
-            using (StreamWriter streamWriter = new StreamWriter($"Diary.csv", true, Encoding.Unicode))
-            {
-               CreateNotes(streamWriter, dataPageDiary,' ');
-                Console.ForegroundColor = ConsoleColor.Red;
 
-                while (AskQuestion("Хотите внести важные дела?y/n") == true)
-                {
-                        CreateNotes(streamWriter, dataPageDiary, 'i');
-                }
-                Console.ResetColor();
-
-                Console.ForegroundColor = ConsoleColor.Green;
-                while (AskQuestion("Есть идеи которые нужно записать?y/n") == true)
-                {
-                    CreateNotes(streamWriter, dataPageDiary, 'c');
-                }
-                Console.ResetColor();
-            }
-        }
-        private static void CreateNotes(StreamWriter sw, DateTime dataPageDiary,char label)
-        { 
-            List<Note> ListNote = new List<Note>();
-                char key = 'y';
-                do
-                {
-                Console.WriteLine("Введите заметку");
-                string business = Console.ReadLine();
-                ListNote.Add(new Note { NameBusines = business, TimeBusines = CheckTime(),TimeCreateNote=DateTime.Now});
-                    Console.WriteLine("Хотите добавить ещё заметку?y/n");
-                    key = Console.ReadKey(true).KeyChar;
-                }
-                while (char.ToLower(key) == 'y');
-
-            ListNote.Sort((a, b) => a.TimeBusines.CompareTo(b.TimeBusines));
-            for (int i = 0; i < ListNote.Count; i++)
-            {
-                sw.WriteLine($"{label}\t{dataPageDiary.ToShortDateString()}" +
-                    $"\t{ListNote[i].TimeBusines.ToShortTimeString()}" +
-                    $"\t{ListNote[i].NameBusines}" +
-                    $"\t{ListNote[i].TimeCreateNote.ToShortDateString()}");
-            }
-
-        }
-        private static void DeletePageDiary()
-        {
-
-        }
-        static DateTime CheckTime()
+       public static DateTime CheckTime()
         {
             DateTime time;
             string input;
@@ -94,7 +48,7 @@ namespace CSharp_Homework7_Diary
                 return time;
             }
         }
-        static DateTime CheckDate()
+        public static DateTime CheckDate()
         {
             DateTime date;
             string input;
@@ -107,11 +61,10 @@ namespace CSharp_Homework7_Diary
             return date;
             
         }
-
-        static bool AskQuestion(string question)
+        public static bool AskQuestion(string question)
         {
             Console.WriteLine(question);
-            bool IsYes=false;
+            bool IsYes = false;
             ConsoleKeyInfo enter = Console.ReadKey(true);
             switch (enter.Key)
             {
