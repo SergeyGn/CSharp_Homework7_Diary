@@ -10,7 +10,7 @@ namespace CSharp_Homework7_Diary
 {
     class Program
     {
-        static string _pathInDiary = @"Diary\";
+       public static string PathInDiary = @"Diary.csv";
         static void Main(string[] args)
         {
             MainMenu();   
@@ -60,6 +60,29 @@ namespace CSharp_Homework7_Diary
             while (!DateTime.TryParseExact(input, "dd.MM.yyyy", null, DateTimeStyles.None, out date));
             return date;
             
+        }
+
+        public static int CheckNumber(string enter,int min, int max)
+        {
+            if (int.TryParse(enter, out int result))
+            {
+                if (result > min && result <= max)
+                { 
+                    return result; 
+                }
+                else
+                {
+                    Console.WriteLine("Выход за дипазонзначений! Попробуйте снова");
+                   string enter2 = Console.ReadLine();
+                   return CheckNumber(enter2, min, max);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Некорректный ввод");
+                string enter2 = Console.ReadLine();
+                return CheckNumber(enter2, min, max);
+            }
         }
         public static bool AskQuestion(string question)
         {

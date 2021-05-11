@@ -19,7 +19,7 @@ namespace CSharp_Homework7_Diary
         /// </summary>
         private DateTime _timeCreateNote;
         /// <summary>
-        /// Тип заметки 'i'-важная ;'c'-концептуальная;' '-обычная. 
+        /// Тип заметки 'i'-важная ;'c'-концептуальная;'s'-обычная. 
         /// </summary>
         private char _typeNote; 
         public DateTime TimeBusines { get => _timeBisnes; set => _timeBisnes = value; }

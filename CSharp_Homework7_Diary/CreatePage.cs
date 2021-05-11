@@ -13,7 +13,7 @@ namespace CSharp_Homework7_Diary
             DateTime dataPageDiary = CheckDate();
             using (StreamWriter streamWriter = new StreamWriter($"Diary.csv", true, Encoding.Unicode))
             {
-                CreateNotes(streamWriter, dataPageDiary, ' ');
+                CreateNotes(streamWriter, dataPageDiary, 's');
                 Console.ForegroundColor = ConsoleColor.Red;
 
                 while (AskQuestion("Хотите внести важные дела?y/n") == true)
