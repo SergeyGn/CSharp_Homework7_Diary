@@ -36,7 +36,7 @@ namespace CSharp_Homework7_Diary
             _typeNote = TypeNote;
         }
         public Note(string NameBisnes)
-            :this(new DateTime(),NameBisnes,new DateTime(),' ')
+            :this(new DateTime(),NameBisnes,new DateTime(),'s')
         {
         }
 

@@ -39,8 +39,8 @@ namespace CSharp_Homework7_Diary
                 Console.WriteLine("Введите заметку");
                 string business = Console.ReadLine();
 
-                if(label=='c')
-                ListNote.Add(new Note { NameBusines = business,TimeCreateNote=DateTime.Now});
+                if (label == 'c')
+                    ListNote.Add(new Note { NameBusines = business, TimeBusines = new DateTime(3333,1,1,23,59,59), TimeCreateNote = DateTime.Now });
                 else
                 ListNote.Add(new Note { NameBusines = business, TimeBusines = CheckTime(), TimeCreateNote = DateTime.Now });
 

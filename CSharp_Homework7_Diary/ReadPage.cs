@@ -111,7 +111,7 @@ namespace CSharp_Homework7_Diary
 
             Console.WriteLine("Введите номер заметки которую нужно отредактировать");
 
-            int numberNoteEdit = CheckNumber(Console.ReadLine(), 0, numberNote);
+            int numberNoteEdit = CheckNumber(Console.ReadLine(), 0, numberNote)-1;
             string noteText = $"{date}\t{ListNote[numberNoteEdit].TimeBusines.ToShortTimeString()}" +
                     $"\t{ListNote[numberNoteEdit].NameBusines}" +
                     $"\t{ ListNote[numberNoteEdit].TimeCreateNote.ToShortDateString()}" +
@@ -128,41 +128,44 @@ namespace CSharp_Homework7_Diary
                 Console.WriteLine("Для редактирования заметки нажмите 1" +
                                 "\nДля редактирования времени нажмите 2");
             }
-            StringBuilder sb = new StringBuilder();
+            //StringBuilder sb = new StringBuilder();
+            string allLine = string.Empty;
             using (StreamReader sr = new StreamReader(PathInDiary))
             {
-                string allLine = sr.ReadToEnd();
-                sb.Append(allLine);
+                allLine = sr.ReadToEnd();
+                //sb.Append(allLine);
 
-                bool b = allLine.Contains(noteText);
-                if (b)
-                {
-                    int index = allLine.IndexOf(noteText);
-                    sb.Remove(index, noteText.Length);
-                }
+                //bool b = allLine.Contains(noteText);
+                //if (b)
+                //{
+                //    int index = allLine.IndexOf(noteText);
+                //    sb.Remove(index, noteText.Length);
+                //}
             }
                 File.Delete(PathInDiary);
             using (StreamWriter sw = new StreamWriter(PathInDiary))
             {
-                sw.WriteLine(sb);
+                //sw.WriteLine(sb);
                 ConsoleKeyInfo enter = Console.ReadKey(true);
                 switch (enter.Key)
                 {
                     case ConsoleKey.D1:
                         Console.WriteLine("Напишите эту заметку заново");
                         string enterBusines = Console.ReadLine();
-                        sw.WriteLine($"{date}\t{ListNote[numberNoteEdit].TimeBusines.ToShortTimeString()}" +
+                        allLine = allLine.Replace($"{date}\t{ListNote[numberNoteEdit].TimeBusines.ToShortTimeString()}" +
                             $"\t{enterBusines} " +
                             $"\t{ ListNote[numberNoteEdit].TimeCreateNote.ToShortDateString()}" +
-                            $"\t{ListNote[numberNoteEdit].TypeNote}");
+                            $"\t{ListNote[numberNoteEdit].TypeNote}", noteText);
+                        sw.WriteLine(allLine);
                         break;
                     case ConsoleKey.D2:
-                        sw.WriteLine(sb);
+                        //sw.WriteLine(sb);
                         Console.WriteLine("Напишите время заново");
-                        sw.WriteLine($"{date}\t{CheckTime()}" +
+                    allLine=allLine.Replace($"{date}\t{CheckTime()}" +
                             $"\t{ListNote[numberNoteEdit].NameBusines}" +
                             $"\t{ListNote[numberNoteEdit].TimeCreateNote.ToShortDateString()}" +
-                            $"\t{ListNote[numberNoteEdit].TypeNote}");
+                            $"\t{ListNote[numberNoteEdit].TypeNote}", noteText);
+                        sw.WriteLine(allLine);
                         break;
                 }
             }
