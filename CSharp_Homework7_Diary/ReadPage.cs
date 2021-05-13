@@ -8,14 +8,13 @@ namespace CSharp_Homework7_Diary
 {
     struct ReadPage
     {
-       public static void ReadPageDiary()
-       {
+        public static void ReadPageDiary()
+        {
             DateTime datePageDiary = CheckDate();
             string date = datePageDiary.ToShortDateString();
+            List<Note> ListNote = new List<Note>();
             using (StreamReader streamReader = new StreamReader("Diary.csv", Encoding.Unicode))
             {
-
-                List<Note> ListNote = new List<Note>();
                 string allLine;
 
                 while ((allLine = streamReader.ReadLine()) != null)
@@ -34,49 +33,50 @@ namespace CSharp_Homework7_Diary
                 }
                 ListNote.Sort((a, b) => a.TimeBusines.CompareTo(b.TimeBusines));
 
-                    Console.Clear();
+                Console.Clear();
 
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.ForegroundColor = ConsoleColor.Black;
-                    Console.SetCursorPosition((Console.WindowWidth - date.Length) / 2, Console.CursorTop);
-                    Console.WriteLine($"Дата:{date}");
-                    Console.ResetColor();
+                Console.BackgroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.SetCursorPosition((Console.WindowWidth - date.Length) / 2, Console.CursorTop);
+                Console.WriteLine($"Дата:{date}");
+                Console.ResetColor();
 
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.SetCursorPosition(Console.WindowWidth - 46, 1);
-                    Console.WriteLine($"Дата создания странички ежедневника:{ListNote[0].TimeCreateNote.ToShortDateString()}");
-                    Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.SetCursorPosition(Console.WindowWidth - 46, 1);
+                Console.WriteLine($"Дата создания странички ежедневника:{ListNote[0].TimeCreateNote.ToShortDateString()}");
+                Console.ResetColor();
 
-                    for (int i = 0; i < ListNote.Count; i++)
-                    {
-                        if (ListNote[i].TypeNote == 's')
-                        {
-                            Console.WriteLine($"{ListNote[i].TimeBusines.ToShortTimeString()}-{ListNote[i].NameBusines}");
-                        }
-                        if (ListNote[i].TypeNote == 'i')
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"{ListNote[i].TimeBusines.ToShortTimeString()}-{ListNote[i].NameBusines}");
-                            Console.ResetColor();
-                        }
-                    }
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("*Идеи*");
-                    for (int i = 0; i < ListNote.Count; i++)
-                    {
-                        if (ListNote[i].TypeNote == 'c')
-                        {
-                            Console.WriteLine($"{ListNote[i].NameBusines}");
-                        }
-                    }
-                    Console.ResetColor();
-
-                if (AskQuestion("Хотите отредактировать заметки на этой странице?y/n")==true)
+                for (int i = 0; i < ListNote.Count; i++)
                 {
-                    EditPage(ListNote,date);
+                    if (ListNote[i].TypeNote == 's')
+                    {
+                        Console.WriteLine($"{ListNote[i].TimeBusines.ToShortTimeString()}-{ListNote[i].NameBusines}");
+                    }
+                    if (ListNote[i].TypeNote == 'i')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"{ListNote[i].TimeBusines.ToShortTimeString()}-{ListNote[i].NameBusines}");
+                        Console.ResetColor();
+                    }
+                }
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("*Идеи*");
+                for (int i = 0; i < ListNote.Count; i++)
+                {
+                    if (ListNote[i].TypeNote == 'c')
+                    {
+                        Console.WriteLine($"{ListNote[i].NameBusines}");
+                    }
                 }
 
+                Console.ResetColor();
             }
+            if (AskQuestion("Хотите отредактировать заметки на этой странице?y/n") == true)
+            {
+                EditPage(ListNote, date);
+            }
+
+
         }
         static void EditPage(List<Note> ListNote, string date)
         {
@@ -128,43 +128,35 @@ namespace CSharp_Homework7_Diary
                 Console.WriteLine("Для редактирования заметки нажмите 1" +
                                 "\nДля редактирования времени нажмите 2");
             }
-            //StringBuilder sb = new StringBuilder();
+
             string allLine = string.Empty;
             using (StreamReader sr = new StreamReader(PathInDiary))
             {
                 allLine = sr.ReadToEnd();
-                //sb.Append(allLine);
-
-                //bool b = allLine.Contains(noteText);
-                //if (b)
-                //{
-                //    int index = allLine.IndexOf(noteText);
-                //    sb.Remove(index, noteText.Length);
-                //}
             }
                 File.Delete(PathInDiary);
             using (StreamWriter sw = new StreamWriter(PathInDiary))
             {
-                //sw.WriteLine(sb);
+
                 ConsoleKeyInfo enter = Console.ReadKey(true);
                 switch (enter.Key)
                 {
                     case ConsoleKey.D1:
                         Console.WriteLine("Напишите эту заметку заново");
                         string enterBusines = Console.ReadLine();
-                        allLine = allLine.Replace($"{date}\t{ListNote[numberNoteEdit].TimeBusines.ToShortTimeString()}" +
+                        allLine = allLine.Replace(noteText,$"{date}\t{ListNote[numberNoteEdit].TimeBusines.ToShortTimeString()}" +
                             $"\t{enterBusines} " +
-                            $"\t{ ListNote[numberNoteEdit].TimeCreateNote.ToShortDateString()}" +
-                            $"\t{ListNote[numberNoteEdit].TypeNote}", noteText);
+                            $"\t{ListNote[numberNoteEdit].TimeCreateNote.ToShortDateString()}" +
+                            $"\t{ListNote[numberNoteEdit].TypeNote}").ToString();
                         sw.WriteLine(allLine);
                         break;
+
                     case ConsoleKey.D2:
-                        //sw.WriteLine(sb);
                         Console.WriteLine("Напишите время заново");
-                    allLine=allLine.Replace($"{date}\t{CheckTime()}" +
+                        allLine=allLine.Replace(noteText, $"{date}\t{CheckTime()}" +
                             $"\t{ListNote[numberNoteEdit].NameBusines}" +
                             $"\t{ListNote[numberNoteEdit].TimeCreateNote.ToShortDateString()}" +
-                            $"\t{ListNote[numberNoteEdit].TypeNote}", noteText);
+                            $"\t{ListNote[numberNoteEdit].TypeNote}");
                         sw.WriteLine(allLine);
                         break;
                 }
