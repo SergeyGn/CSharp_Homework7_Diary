@@ -88,14 +88,14 @@ namespace CSharp_Homework7_Diary
                                 $"\t{ListNote[numberNoteEdit].TypeNote}");
                         break;
                     case ConsoleKey.D3:
-                        allLine = allLine.Replace($"{noteText}\t", null);
+                        allLine = allLine.Replace($"{noteText}\r\n", null);
                         break;
                     default:
                         Console.WriteLine("Неверный ввод");
                         EditPageDiary(ListNote, datePageDiary);
                         break;
                 }
-                sw.WriteLine(allLine);
+                sw.Write(allLine);
             }
             EndMenu(ListNote, datePageDiary);
             
