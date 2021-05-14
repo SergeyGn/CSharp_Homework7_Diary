@@ -12,7 +12,10 @@ namespace CSharp_Homework7_Diary
         {
             using (StreamWriter streamWriter = new StreamWriter($"Diary.csv", true, Encoding.Unicode))
             {
-                CreateNotes(streamWriter, dataPageDiary, 's');
+                while (AskQuestion("Хотите добавить заметку?y/n")==true)
+                {
+                    CreateNotes(streamWriter, dataPageDiary, 's');
+                }
                 Console.ForegroundColor = ConsoleColor.Red;
 
                 while (AskQuestion("Хотите внести важные дела?y/n") == true)
@@ -33,9 +36,6 @@ namespace CSharp_Homework7_Diary
         private static void CreateNotes(StreamWriter sw, DateTime datePageDiary, char label)
         {
             List<Note> ListNote = new List<Note>();
-            char key = 'y';
-            do
-            {
                 Console.WriteLine("Введите заметку");
                 string business = Console.ReadLine();
 
@@ -43,11 +43,6 @@ namespace CSharp_Homework7_Diary
                     ListNote.Add(new Note {DateBusines=datePageDiary, NameBusines = business, TimeBusines = new DateTime(3333,1,1,23,59,59), TimeCreateNote = DateTime.Now });
                 else
                 ListNote.Add(new Note { DateBusines = datePageDiary, NameBusines = business, TimeBusines = CheckTime(), TimeCreateNote = DateTime.Now });
-
-                Console.WriteLine("Хотите добавить ещё заметку?y/n");
-                key = Console.ReadKey(true).KeyChar;
-            }
-            while (char.ToLower(key) == 'y');
 
             for (int i = 0; i < ListNote.Count; i++)
             {

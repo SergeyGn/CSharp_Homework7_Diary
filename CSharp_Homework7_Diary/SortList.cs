@@ -110,6 +110,7 @@ namespace CSharp_Homework7_Diary
                 while ((allLine = streamReader.ReadLine()) != null)
                 {
                     string[] lines = allLine.Split('\t');
+
                     ListNote.Add(new Note()
                     {
                         DateBusines = DateTime.Parse(lines[0]),

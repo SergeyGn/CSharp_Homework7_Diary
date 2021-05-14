@@ -19,17 +19,25 @@ namespace CSharp_Homework7_Diary
         }
         public static void MainMenu()
         {
-            Console.WriteLine("Для создания задач нажмите 1");
-            Console.WriteLine("Для просмотра задач нажмите 2");
+            Console.WriteLine("Для создания задач нажмите 1" +
+                            "\nДля просмотра задач нажмите 2" +
+                            "\nДля выхода нажмите Q");
             ConsoleKeyInfo enter = Console.ReadKey(true);
             switch (enter.Key)
             {
                 case ConsoleKey.D1:
                     DateTime dataPageDiary = CheckDate();
+                    if(dataPageDiary<DateTime.Now)
+                    {
+                        Console.WriteLine("Это время уже прошло. Нельзя планировать в прошедшем времени");
+                        MainMenu();
+                    }
                     CreatePageDiary(dataPageDiary);
                     break;
                 case ConsoleKey.D2:
                     ReadPageDiary(GetListNote());
+                    break;
+                case ConsoleKey.Q:
                     break;
                 default:
                     MainMenu();
