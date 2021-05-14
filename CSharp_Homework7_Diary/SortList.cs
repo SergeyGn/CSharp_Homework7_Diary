@@ -55,7 +55,22 @@ namespace CSharp_Homework7_Diary
                     for (int i = 0; i < ListNote.Count; i++)
                     {
                         numberItem++;
-                        Console.WriteLine($"[№{numberItem}]{ListNote[i].TypeNote}");
+                        if (ListNote[i].TypeNote == 'i')
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"[№{numberItem}][{ListNote[i].DateBusines}]{ListNote[i].TimeBusines}-{ListNote[i].NameBusines}");
+                            Console.ResetColor();
+                        }
+                        else if (ListNote[i].TypeNote == 'c')
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"[№{numberItem}][{ListNote[i].DateBusines}]Идея:{ListNote[i].NameBusines}");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"[№{numberItem}][{ListNote[i].DateBusines}]{ListNote[i].TimeBusines}-{ListNote[i].NameBusines}");
+                        }
                     }
                     break;
                 case ConsoleKey.D5:
