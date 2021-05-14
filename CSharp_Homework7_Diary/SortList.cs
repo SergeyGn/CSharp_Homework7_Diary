@@ -14,7 +14,7 @@ namespace CSharp_Homework7_Diary
 
             Console.Clear();
             Console.WriteLine("Хотите отсортировать ежедневник:" +
-                " по времени дела нажмите 1" +
+                "\nпо времени дела нажмите 1" +
                "\nпо названию дела нажмите 2" +
                "\nпо времени создания дела нажмите 3" +
                "\nпо типу задач нажмите 4" +
@@ -23,14 +23,15 @@ namespace CSharp_Homework7_Diary
 
             ConsoleKeyInfo enter = Console.ReadKey(true);
             int numberItem = 0;
+            DateTime enterDate;
             switch (enter.Key)
-            {
+            { 
                 case ConsoleKey.D1:
                     ListNote.Sort((a, b) => a.TimeBusines.CompareTo(b.TimeBusines));
                     for (int i = 0; i < ListNote.Count; i++)
                     {
                         numberItem++;
-                        Console.WriteLine($"[№{numberItem}]{ListNote[i].TimeBusines}");
+                        Console.WriteLine($"[№{numberItem}]{ListNote[i].TimeBusines.ToShortTimeString()}-{ListNote[i].NameBusines}[{ListNote[i].DateBusines.ToShortDateString()}]");
                     }
                     break;
                 case ConsoleKey.D2:
@@ -38,7 +39,7 @@ namespace CSharp_Homework7_Diary
                     for (int i = 0; i < ListNote.Count; i++)
                     {
                         numberItem++;
-                        Console.WriteLine($"[№{numberItem}]{ListNote[i].NameBusines}");
+                        Console.WriteLine($"[№{numberItem}]{ListNote[i].NameBusines}-{ListNote[i].TimeBusines.ToShortTimeString()}[{ListNote[i].DateBusines.ToShortDateString()}]");
                     }
                     break;
                 case ConsoleKey.D3:
@@ -46,7 +47,7 @@ namespace CSharp_Homework7_Diary
                     for (int i = 0; i < ListNote.Count; i++)
                     {
                         numberItem++;
-                        Console.WriteLine($"[№{numberItem}]{ListNote[i].TimeCreateNote}");
+                        Console.WriteLine($"[№{numberItem}]{ListNote[i].TimeCreateNote.ToShortDateString()}");
                     }
                     break;
                 case ConsoleKey.D4:
@@ -58,15 +59,15 @@ namespace CSharp_Homework7_Diary
                     }
                     break;
                 case ConsoleKey.D5:
-                    GetListDate();
-                    break;
+                    enterDate=GetListDate();
+                    return enterDate;
                 default:
                     Console.WriteLine("Некорректный ввод");
                     GetListNote();
                     break;
             }
             int enter1 = CheckNumber(Console.ReadLine(), 0, numberItem) - 1;
-            DateTime enterDate = ListNote[enter1].DateBusines;
+            enterDate = ListNote[enter1].DateBusines;
             return enterDate;
         }
 
@@ -77,7 +78,6 @@ namespace CSharp_Homework7_Diary
             using (StreamReader streamReader = new StreamReader("Diary.csv", Encoding.Unicode))
             {
                 List<DateTime> ListDateResult = new List<DateTime>();
-                string allLine;
 
                 ListNote.Sort((a, b) => a.DateBusines.CompareTo(b.DateBusines));
                 ListDateResult.Add(ListNote[0].DateBusines);
@@ -93,7 +93,7 @@ namespace CSharp_Homework7_Diary
                 for (int i = 0; i < ListDateResult.Count; i++)
                 {
                     numberDate++;
-                    Console.WriteLine($"[№{numberDate}]{ListDateResult[i]}");
+                    Console.WriteLine($"[№{numberDate}]{ListDateResult[i].ToShortDateString()}");
                 }
                 int enter = CheckNumber(Console.ReadLine(), 0, numberDate) - 1;
                 return ListDateResult[enter];

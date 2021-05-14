@@ -47,9 +47,10 @@ namespace CSharp_Homework7_Diary
             {
                 case ConsoleKey.D1:
                     EditPageDiary(ListNote, datePageDiary);
+                    ReadPageDiary(datePageDiary);
                     break;
                 case ConsoleKey.D2:
-                    CreatePage.CreatePageDiary(datePageDiary);
+                    CreatePageDiary(datePageDiary);
                     break;
                 case ConsoleKey.D3:
                     MainMenu();

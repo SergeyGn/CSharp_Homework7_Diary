@@ -51,13 +51,14 @@ namespace CSharp_Homework7_Diary
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"{ ListNote[numberNoteEdit].NameBusines}");
-                Console.WriteLine("Для редактирования заметки нажмите 1");
+                Console.WriteLine("Для редактирования или удаления заметки нажмите 1");
             }
             else
             {
                 Console.WriteLine($"{ListNote[numberNoteEdit].TimeBusines.ToShortTimeString()}-{ListNote[numberNoteEdit].NameBusines}");
                 Console.WriteLine("Для редактирования заметки нажмите 1" +
-                                "\nДля редактирования времени нажмите 2");
+                                "\nДля редактирования времени нажмите 2" +
+                                "\nДля удаления заметки нажмите 3");
             }
 
             string allLine = string.Empty;
@@ -78,7 +79,6 @@ namespace CSharp_Homework7_Diary
                             $"\t{enterBusines} " +
                             $"\t{ListNote[numberNoteEdit].TimeCreateNote.ToShortDateString()}" +
                             $"\t{ListNote[numberNoteEdit].TypeNote}");
-                        sw.WriteLine(allLine);
                         break;
                     case ConsoleKey.D2:
                         Console.WriteLine("Напишите время заново");
@@ -86,15 +86,19 @@ namespace CSharp_Homework7_Diary
                                 $"\t{ListNote[numberNoteEdit].NameBusines}" +
                                 $"\t{ListNote[numberNoteEdit].TimeCreateNote.ToShortDateString()}" +
                                 $"\t{ListNote[numberNoteEdit].TypeNote}");
-                        sw.WriteLine(allLine);
+                        break;
+                    case ConsoleKey.D3:
+                        allLine = allLine.Replace($"{noteText}\t", null);
                         break;
                     default:
                         Console.WriteLine("Неверный ввод");
                         EditPageDiary(ListNote, datePageDiary);
                         break;
                 }
-                EndMenu(ListNote, datePageDiary);
+                sw.WriteLine(allLine);
             }
+            EndMenu(ListNote, datePageDiary);
+            
         }
     }
 }

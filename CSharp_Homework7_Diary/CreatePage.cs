@@ -20,7 +20,7 @@ namespace CSharp_Homework7_Diary
                     CreateNotes(streamWriter, dataPageDiary, 'i');
                 }
                 Console.ResetColor();
-
+           
                 Console.ForegroundColor = ConsoleColor.Green;
                 while (AskQuestion("Есть идеи которые нужно записать?y/n") == true)
                 {
@@ -28,6 +28,7 @@ namespace CSharp_Homework7_Diary
                 }
                 Console.ResetColor();
             }
+            MainMenu();
         }
         private static void CreateNotes(StreamWriter sw, DateTime datePageDiary, char label)
         {
@@ -56,7 +57,6 @@ namespace CSharp_Homework7_Diary
                     $"\t{ListNote[i].TimeCreateNote.ToShortDateString()}" +
                     $"\t{label}");
             }
-            EndMenu(ListNote, datePageDiary);
         }
     }
 }
