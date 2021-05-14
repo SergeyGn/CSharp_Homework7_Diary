@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using static CSharp_Homework7_Diary.Program;
-using static CSharp_Homework7_Diary.ReadPage;
 
 namespace CSharp_Homework7_Diary
 {

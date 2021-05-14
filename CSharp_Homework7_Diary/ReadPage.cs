@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using static CSharp_Homework7_Diary.Program;
-using static CSharp_Homework7_Diary.EditPage;
 
 namespace CSharp_Homework7_Diary
 {
@@ -34,13 +33,11 @@ namespace CSharp_Homework7_Diary
                 ListNote.Sort((a, b) => a.TimeBusines.CompareTo(b.TimeBusines));
 
                 Console.Clear();
-
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.SetCursorPosition((Console.WindowWidth - date.Length) / 2, Console.CursorTop);
                 Console.WriteLine($"Дата:{date}");
                 Console.ResetColor();
-
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.SetCursorPosition(Console.WindowWidth - 46, 1);
                 Console.WriteLine($"Дата создания странички ежедневника:{ListNote[0].TimeCreateNote.ToShortDateString()}");
@@ -68,12 +65,9 @@ namespace CSharp_Homework7_Diary
                         Console.WriteLine($"{ListNote[i].NameBusines}");
                     }
                 }
-
                 Console.ResetColor();
             }
             EndMenu(ListNote, datePageDiary);
-
-
         }
     }
 }
