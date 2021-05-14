@@ -7,6 +7,10 @@ namespace CSharp_Homework7_Diary
   public struct Note
     {
         /// <summary>
+        /// Дата дела
+        /// </summary>
+        private DateTime _dateBusines;
+        /// <summary>
         /// Время когда выполнить дело
         /// </summary>
         private  DateTime _timeBisnes;
@@ -26,17 +30,18 @@ namespace CSharp_Homework7_Diary
         public string NameBusines { get => _nameBisnes; set => _nameBisnes = value; }
         public DateTime TimeCreateNote { get => _timeCreateNote; set => _timeCreateNote = value; }
         public char TypeNote { get => _typeNote; set => _typeNote = value; }
-        
+        public DateTime DateBusines { get => _dateBusines; set => _dateBusines = value; }
 
-        public Note(DateTime TimeBisnes, string NameBisnes, DateTime TimeCreateNote, char TypeNote)
+        public Note(DateTime DateBusines,DateTime TimeBisnes, string NameBisnes, DateTime TimeCreateNote, char TypeNote)
         {
+            _dateBusines = DateBusines;
             _timeBisnes = TimeBisnes;
             _nameBisnes=NameBisnes;
             _timeCreateNote = TimeCreateNote;
             _typeNote = TypeNote;
         }
         public Note(string NameBisnes)
-            :this(new DateTime(),NameBisnes,new DateTime(),'s')
+            :this(new DateTime(),new DateTime(),NameBisnes,new DateTime(),'s')
         {
         }
 

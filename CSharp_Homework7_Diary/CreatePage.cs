@@ -8,9 +8,8 @@ namespace CSharp_Homework7_Diary
 {
     struct CreatePage
     {
-        public static void CreatePageDiary()
+        public static void CreatePageDiary(DateTime dataPageDiary)
         {
-            DateTime dataPageDiary = CheckDate();
             using (StreamWriter streamWriter = new StreamWriter($"Diary.csv", true, Encoding.Unicode))
             {
                 CreateNotes(streamWriter, dataPageDiary, 's');
@@ -30,7 +29,7 @@ namespace CSharp_Homework7_Diary
                 Console.ResetColor();
             }
         }
-        private static void CreateNotes(StreamWriter sw, DateTime dataPageDiary, char label)
+        private static void CreateNotes(StreamWriter sw, DateTime datePageDiary, char label)
         {
             List<Note> ListNote = new List<Note>();
             char key = 'y';
@@ -40,9 +39,9 @@ namespace CSharp_Homework7_Diary
                 string business = Console.ReadLine();
 
                 if (label == 'c')
-                    ListNote.Add(new Note { NameBusines = business, TimeBusines = new DateTime(3333,1,1,23,59,59), TimeCreateNote = DateTime.Now });
+                    ListNote.Add(new Note {DateBusines=datePageDiary, NameBusines = business, TimeBusines = new DateTime(3333,1,1,23,59,59), TimeCreateNote = DateTime.Now });
                 else
-                ListNote.Add(new Note { NameBusines = business, TimeBusines = CheckTime(), TimeCreateNote = DateTime.Now });
+                ListNote.Add(new Note { DateBusines = datePageDiary, NameBusines = business, TimeBusines = CheckTime(), TimeCreateNote = DateTime.Now });
 
                 Console.WriteLine("Хотите добавить ещё заметку?y/n");
                 key = Console.ReadKey(true).KeyChar;
@@ -51,12 +50,13 @@ namespace CSharp_Homework7_Diary
 
             for (int i = 0; i < ListNote.Count; i++)
             {
-                sw.WriteLine($"{dataPageDiary.ToShortDateString()}" +
+                sw.WriteLine($"{datePageDiary.ToShortDateString()}" +
                     $"\t{ListNote[i].TimeBusines.ToShortTimeString()}" +
                     $"\t{ListNote[i].NameBusines}" +
                     $"\t{ListNote[i].TimeCreateNote.ToShortDateString()}" +
                     $"\t{label}");
             }
+            EndMenu(ListNote, datePageDiary);
         }
     }
 }

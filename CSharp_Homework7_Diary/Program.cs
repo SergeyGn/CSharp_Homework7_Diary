@@ -5,6 +5,8 @@ using System.IO;
 using System.Text;
 using static CSharp_Homework7_Diary.CreatePage;
 using static CSharp_Homework7_Diary.ReadPage;
+using static CSharp_Homework7_Diary.EditPage;
+using static CSharp_Homework7_Diary.SortList;
 
 namespace CSharp_Homework7_Diary
 {
@@ -15,7 +17,7 @@ namespace CSharp_Homework7_Diary
         {
             MainMenu();   
         }
-        private static void MainMenu()
+        public static void MainMenu()
         {
             Console.WriteLine("Для создания задач нажмите 1");
             Console.WriteLine("Для просмотра задач нажмите 2");
@@ -23,16 +25,41 @@ namespace CSharp_Homework7_Diary
             switch (enter.Key)
             {
                 case ConsoleKey.D1:
-                CreatePageDiary();
+                    DateTime dataPageDiary = CheckDate();
+                    CreatePageDiary(dataPageDiary);
                     break;
                 case ConsoleKey.D2:
-                ReadPageDiary();
+                    ReadPageDiary(GetListNote());
                     break;
                 default:
                     MainMenu();
                     break;
             }
         }
+       public static void EndMenu(List<Note> ListNote, DateTime datePageDiary)
+        {
+            Console.WriteLine("Для того чтобы:" +
+    "\nредактировать текущую страницу нажмите 1" +
+    "\nдля создания заметок на этой странице нажмите 2" +
+    "\nдля того чтобы выйти в главное меню нажмите 3");
+            ConsoleKeyInfo enter = Console.ReadKey(true);
+            switch (enter.Key)
+            {
+                case ConsoleKey.D1:
+                    EditPageDiary(ListNote, datePageDiary);
+                    break;
+                case ConsoleKey.D2:
+                    CreatePage.CreatePageDiary(datePageDiary);
+                    break;
+                case ConsoleKey.D3:
+                    MainMenu();
+                    break;
+                default:
+                    Console.WriteLine("Неверный вводб Попробуйте ещё раз");
+                    break;
+            }
+        }
+
 
        public static DateTime CheckTime()
         {
